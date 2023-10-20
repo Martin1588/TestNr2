@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Num 1");
             if (!((GameItem)EquippedItems[0]).Equals(ActiveItem))
             {
-                if(ActiveItem != null)
+                if(ActiveItem.activeObject != null)
                     ActiveItem.transform.localPosition = ActiveItem.stowedPosition;                
                 ActiveItem = (GameItem)EquippedItems[0];
                 Debug.Log("Change to " + ActiveItem.activePosition);
@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (ActiveItem != EquippedItems[1])
+            if (ActiveItem.activeObject != EquippedItems[1].activeObject)
             {
                 ActiveItem.transform.localPosition = ActiveItem.stowedPosition;
                 ActiveItem = (GameItem)EquippedItems[1];
@@ -76,6 +76,8 @@ public class PlayerManager : MonoBehaviour
         EquippedItems.OfType<Gun>().ToList().ForEach(x => x.Instantiate());
 
         ActiveItem = EquippedItems.First() as Benelli;
+
+        Debug.Log(ActiveItem.activePosition.ToString());  
 
         ActiveItem.activeObject.transform.localPosition = ActiveItem.activePosition;    
     }

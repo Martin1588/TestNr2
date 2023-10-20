@@ -15,7 +15,8 @@ public class Gun : GameItem
     public List<SkillChips> SkillChips { get; set; }
 
     public Vector3 stowedPosition = new Vector3(0, 0, -5);
-    public Vector3 activePosition = new Vector3(.2f, -.5f, .8f);
+    
+    //public Vector3 activePosition = new Vector3(.2f, -.5f, .8f);
 
     public float hipFOV = 60f;
     public float adsFOV = 40f;
@@ -37,6 +38,7 @@ public class Gun : GameItem
     public Gun()
     {
         //this.GunType = type;
+        activePosition = new Vector3(.2f, -.2f, 1f);
     }
 
     void Start()
@@ -73,10 +75,6 @@ public class Gun : GameItem
         if (recoilAnimation != null)
             recoilAnimation.Play();
 
-        Vector3 recoilDirection = -activeObject.transform.forward;
-        activeObject.transform.position += recoilDirection * recoilForce;        
-    
-
         if (Physics.Raycast(activeObject.transform.position, activeObject.transform.forward * -1, out hit, range))
         {
             Debug.Log(hit.transform.name);
@@ -87,7 +85,10 @@ public class Gun : GameItem
                 target.TakeDamage(damage);
             }
         }
-    }   
+
+        Vector3 recoilDirection = -activeObject.transform.forward;
+        activeObject.transform.position += recoilDirection * recoilForce * -1;
+    }
 
     public void Aim()
     {
@@ -101,7 +102,9 @@ public class Gun : GameItem
         //Prefab.GetComponent<WeaponSway>().swayAmount = .2f;
         //Prefab.GetComponent<WeaponSway>().maxSwayAmount = .5f;
 
-        Vector3 targetPosition = new Vector3(-.0815f, -.41f, .4f);
+        //Vector3 targetPosition = new Vector3(-.0815f, -.41f, .4f);
+        Vector3 targetPosition = new Vector3(0f, -.1f, 0f);
+
         activeObject.transform.localPosition = Vector3.Lerp(activeObject.transform.localPosition, targetPosition, Time.deltaTime * aimingSpeed);
     }
 }

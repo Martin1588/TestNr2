@@ -15,7 +15,8 @@ public class Benelli : Gun
         aimingSpeed = 10f;
 
         adsPosition = new Vector3(-.0815f, -.41f, .4f);
-        activePosition = new Vector3(.2f, -.5f, .8f);        
+        activePosition = new Vector3(0f, -.375f, 1f);        
+         //  activePosition = new Vector3(.2f, -.5f, .8f);     
 
         this.PrefabPath ="Weapons/Bennelli_M4";
         this.Prefab = Resources.Load("Weapons/Bennelli_M4") as GameObject;
